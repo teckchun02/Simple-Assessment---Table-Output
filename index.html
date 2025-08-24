@@ -9,12 +9,9 @@
 
   <div class="container">
     <h2 class="mb-3">Table 1 (Input Data)</h2>
-    <table class="table table-bordered table-striped">
+    <table id="table1" class="table table-bordered table-striped">
       <thead>
-        <tr>
-          <th>Index #</th>
-          <th>Value</th>
-        </tr>
+        <tr><th>Index #</th><th>Value</th></tr>
       </thead>
       <tbody>
         <tr><td>A1</td><td>41</td></tr>
@@ -41,20 +38,31 @@
     </table>
 
     <h2 class="mt-5 mb-3">Table 2 (Processed Data)</h2>
-    <table class="table table-bordered table-striped">
+    <table id="table2" class="table table-bordered table-striped">
       <thead>
-        <tr>
-          <th>Category</th>
-          <th>Value</th>
-        </tr>
+        <tr><th>Category</th><th>Value</th></tr>
       </thead>
-      <tbody>
-        <tr><td>Alpha</td><td>30</td></tr>
-        <tr><td>Beta</td><td>16</td></tr>
-        <tr><td>Charlie</td><td>270</td></tr>
-      </tbody>
+      <tbody></tbody>
     </table>
   </div>
+
+  <script>
+    let table1 = document.querySelectorAll("#table1 tbody tr");
+    let data = {};
+    table1.forEach(row => {
+      let key = row.cells[0].innerText;
+      let val = +row.cells[1].innerText;
+      data [key] = val;
+    });
+
+    let rows = `
+      <tr><td>Alpha</td><td>${data["A5"] + data["A20"]}</td></tr>
+      <tr><td>Beta</td><td>${data["A15"] / data["A7"]}</td></tr>
+      <tr><td>Charlie</td><td>${data["A13"] * data["A12"]}</td></tr>
+    `;
+
+    document.querySelector("#table2 tbody").innerHTML = rows;
+  </script>
 
 </body>
 </html>
